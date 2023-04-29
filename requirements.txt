@@ -3,6 +3,7 @@ boto3==1.26.123
 botocore==1.29.123
 Django==3.2.18
 django-storages==1.13.2
+djangorestframework==3.14.0
 jmespath==1.0.1
 Pillow==9.5.0
 python-dateutil==2.8.2
