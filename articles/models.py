@@ -22,6 +22,7 @@ class Article(models.Model):
     ('perl', 'Perl'),
     ('html', 'HTML'),
     ('css', 'CSS'),
+    ('other', 'Other'),
 )
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -31,6 +32,7 @@ class Article(models.Model):
     primary_language = models.CharField(
         max_length=50,
         choices=LANGUAGE_CHOICES,
+        blank=True,
     )
     github_link = models.URLField(blank=True)
 
