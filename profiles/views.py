@@ -29,13 +29,15 @@ class ProfileList(generics.ListAPIView):
         'owner__followed__created_at',
     ]
 
-
-
-
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     Update later
     """
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        article_count = Count('owner__article', distinct=True),
+        followed_count = Count('owner__followed', distinct=True),
+        following_count = Count('owner__following', distinct=True),
+        languages_count = Count('owner__language', distinct=True),
+    ).order_by('-created_at')

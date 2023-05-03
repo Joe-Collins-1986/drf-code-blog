@@ -9,6 +9,9 @@ class ArticleSerializer(serializers.ModelSerializer):
     profile_image = serializers.SerializerMethodField()
     like_id = serializers.SerializerMethodField()
 
+    comments_count = serializers.ReadOnlyField()
+    likes_count = serializers.ReadOnlyField()
+
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
@@ -35,5 +38,5 @@ class ArticleSerializer(serializers.ModelSerializer):
             'updated_at', 'art_title', 'art_content',
             'primary_language', 'github_link',
             'is_owner', 'profile_id', 'profile_image',
-            'like_id',
+            'like_id', 'comments_count', 'likes_count',
         ]
