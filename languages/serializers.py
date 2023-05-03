@@ -43,4 +43,7 @@ class LanguageSerializer(serializers.ModelSerializer):
         ]
 
 class LanguageDetailSerializer(LanguageSerializer):
-    language = serializers.ReadOnlyField(source='language.language')
+    language = serializers.ReadOnlyField()
+
+
+
