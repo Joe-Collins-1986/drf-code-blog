@@ -3,6 +3,7 @@ from rest_framework import generics, permissions, filters
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Article
 from .serializers import ArticleSerializer
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ArticleList(generics.ListCreateAPIView):
     """
@@ -19,6 +20,13 @@ class ArticleList(generics.ListCreateAPIView):
     filter_backends = [
         filters.SearchFilter,
         filters.OrderingFilter,
+        DjangoFilterBackend,
+    ]
+
+    filterset_fields = [
+        'owner__followed__owner__profile',
+        'likes__owner__profile',
+        'owner__profile',
     ]
 
     search_fields = [
