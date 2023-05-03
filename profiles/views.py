@@ -16,6 +16,21 @@ class ProfileList(generics.ListAPIView):
         languages_count = Count('owner__language', distinct=True),
     ).order_by('-created_at')
 
+    filter_backends = [
+        filters.OrderingFilter
+    ]
+
+    ordering_fields = [
+        'posts_count',
+        'followers_count',
+        'following_count',
+        'languages_count',
+        'owner__following__created_at',
+        'owner__followed__created_at',
+    ]
+
+
+
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
