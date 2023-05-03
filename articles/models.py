@@ -1,36 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
+from languages.choices import LANGUAGE_CHOICES
 
 
 class Article(models.Model):
     """
     Add later
     """
-    LANGUAGE_CHOICES = (
-    ('javascript', 'JavaScript'),
-    ('python', 'Python'),
-    ('java', 'Java'),
-    ('c++', 'C++'),
-    ('c#', 'C#'),
-    ('typescript', 'TypeScript'),
-    ('ruby', 'Ruby'),
-    ('swift', 'Swift'),
-    ('go', 'Go'),
-    ('kotlin', 'Kotlin'),
-    ('rust', 'Rust'),
-    ('php', 'PHP'),
-    ('perl', 'Perl'),
-    ('html', 'HTML'),
-    ('css', 'CSS'),
-    ('other', 'Other'),
-)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     art_title = models.CharField(max_length=255)
     art_content = models.TextField(blank=True)
     primary_language = models.CharField(
-        max_length=50,
+        max_length=25,
         choices=LANGUAGE_CHOICES,
         blank=True,
     )
