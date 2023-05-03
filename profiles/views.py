@@ -3,6 +3,7 @@ from rest_framework import generics, filters
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ProfileList(generics.ListAPIView):
     """
@@ -17,7 +18,13 @@ class ProfileList(generics.ListAPIView):
     ).order_by('-created_at')
 
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        DjangoFilterBackend,
+    ]
+
+    filterset_fields = [
+        'owner__following__followed__profile', #FOLLOWERS
+        'owner__followed__owner__profile', #FOLLOWING
     ]
 
     ordering_fields = [
