@@ -27,6 +27,7 @@ class ArticleList(generics.ListCreateAPIView):
         'owner__followed__owner__profile',
         'likes__owner__profile',
         'owner__profile',
+        'primary_language',
     ]
 
     search_fields = [
