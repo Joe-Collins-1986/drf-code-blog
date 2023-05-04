@@ -14,7 +14,7 @@ class ProfileList(generics.ListAPIView):
         article_count = Count('owner__article', distinct=True),
         followed_count = Count('owner__followed', distinct=True),
         following_count = Count('owner__following', distinct=True),
-        languages_count = Count('owner__language', distinct=True),
+        languages_count = Count('owner__languages', distinct=True),
     ).order_by('-created_at')
 
     filter_backends = [
@@ -25,6 +25,7 @@ class ProfileList(generics.ListAPIView):
     filterset_fields = [
         'owner__following__followed__profile', #FOLLOWERS
         'owner__followed__owner__profile', #FOLLOWING
+        'owner__languages__language'
     ]
 
     ordering_fields = [
@@ -46,5 +47,5 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         article_count = Count('owner__article', distinct=True),
         followed_count = Count('owner__followed', distinct=True),
         following_count = Count('owner__following', distinct=True),
-        languages_count = Count('owner__language', distinct=True),
+        languages_count = Count('owner__languages', distinct=True),
     ).order_by('-created_at')

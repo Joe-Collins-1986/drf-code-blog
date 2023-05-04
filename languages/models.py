@@ -5,7 +5,7 @@ from .choices import LANGUAGE_CHOICES, CONFIDENCE_LEVEL
 
 class Language(models.Model):
 
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="languages")
     language = models.CharField(
         max_length=25,
         choices=LANGUAGE_CHOICES,
